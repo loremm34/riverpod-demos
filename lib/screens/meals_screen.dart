@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_3/data/default_data.dart';
 import 'package:flutter_application_3/models/meal.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key, required this.title, required this.meals});
+  MealsScreen({super.key, required this.title, required this.meals});
 
   final String title;
   final List<Meal> meals;
@@ -13,7 +14,7 @@ class MealsScreen extends StatelessWidget {
       itemCount: meals.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               Text(meals[index].title),
@@ -25,11 +26,14 @@ class MealsScreen extends StatelessWidget {
     );
 
     if (meals.isEmpty) {
-      content = Center(child: Text("Ничего не найдено"));
+      content = const Center(child: Text("Ничего не найдено"));
     }
     return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: content,
       ),
     );
