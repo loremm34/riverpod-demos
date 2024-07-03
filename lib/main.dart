@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/screens/categories_screen.dart';
+import 'package:flutter_application_3/screens/meals_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -21,7 +22,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: CategoriesScreen(),
+      home: MealsScreen(
+        title: "SDFSDF",
+        meals: [],
+      ),
     );
   }
 }
