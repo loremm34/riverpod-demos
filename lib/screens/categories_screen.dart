@@ -42,10 +42,11 @@ class CategoriesScreen extends StatelessWidget {
           children: availableCategories.map(
             (category) {
               return CategoryGridItem(
-                  category: category,
-                  selectCategory: () {
-                    _onCategoryTap(context, category);
-                  });
+                category: category,
+                selectCategory: () {
+                  _onCategoryTap(context, category);
+                },
+              );
             },
           ).toList(),
         ),
