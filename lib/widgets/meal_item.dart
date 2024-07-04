@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/models/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_application_3/widgets/meal_item_trait.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({super.key, required this.meal});
 
   final Meal meal;
 
+  String get complexityText {
+    return meal.complexity.name[0].toUpperCase() +
+        meal.complexity.name.substring(1, meal.complexity.name.length);
+  }
+
+  String get affordabilityText {
+    return meal.affordability.name[0].toUpperCase() +
+        meal.affordability.name.substring(1, meal.affordability.name.length);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(6),
+      margin: const EdgeInsets.all(6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -51,6 +62,27 @@ class MealItem extends StatelessWidget {
                     ),
                     const SizedBox(
                       height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MealItemTrait(
+                          label: meal.duration.toString(),
+                          icon: Icons.schedule,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        MealItemTrait(
+                          label: complexityText,
+                          icon: Icons.work,
+                        ),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        MealItemTrait(
+                            label: affordabilityText, icon: Icons.attach_money)
+                      ],
                     ),
                   ],
                 ),
