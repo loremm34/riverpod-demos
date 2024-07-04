@@ -9,8 +9,46 @@ class MealDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(meal.title),
+      appBar: AppBar(
+        title: Text(meal.title),
+      ),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              Image.network(
+                meal.imageUrl,
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(
+                height: 14,
+              ),
+              Text(
+                "Ingredients",
+                style: Theme.of(context).textTheme.titleLarge!,
+              ),
+              for (final ingredient in meal.ingredients) Text(ingredient),
+              const SizedBox(
+                height: 14,
+              ),
+              Text(
+                "Steps: ",
+                style: Theme.of(context).textTheme.titleLarge!,
+              ),
+              for (final step in meal.steps)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                  child: Text(
+                    step,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+            ],
+          ),
+        ],
       ),
     );
   }
