@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/widgets/main_drawer.dart';
 import 'package:flutter_application_3/screens/tabs_screen.dart';
+import 'package:flutter_application_3/widgets/switch_list_tile_item.dart';
 
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
@@ -11,6 +12,28 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersScreenState extends State<FiltersScreen> {
   var _glutenFreeFilterList = false;
+  var _lactoseFreeFilterList = false;
+  var _vegetarianFreeFilterList = false;
+  var _veganFreeFilterList = false;
+
+  void _onSwitchFilterChange(bool isSwitched, String filterType) {
+    setState(() {
+      switch (filterType) {
+        case 'gluten':
+          _glutenFreeFilterList = isSwitched;
+          break;
+        case 'lactose':
+          _lactoseFreeFilterList = isSwitched;
+          break;
+        case 'vegetarian':
+          _vegetarianFreeFilterList = isSwitched;
+          break;
+        case 'vegan':
+          _veganFreeFilterList = isSwitched;
+          break;
+      }
+    });
+  }
 
   void _selectScreen(String identifier) {
     Navigator.of(context).pop();
@@ -32,28 +55,42 @@ class _FiltersScreenState extends State<FiltersScreen> {
         onSelectScreen: _selectScreen,
       ),
       appBar: AppBar(
-        title: Text("Your Filters"),
+        title: const Text("Your Filters"),
       ),
       body: Column(
         children: [
-          SwitchListTile(
-            value: _glutenFreeFilterList,
-            onChanged: (isCheked) {
-              setState(() {
-                _glutenFreeFilterList = isCheked;
-              });
+          SwitchListTileItem(
+            filterList: _glutenFreeFilterList,
+            toogleChange: (bool isCheked) {
+              _onSwitchFilterChange(isCheked, 'gluten');
             },
-            title: Text(
-              "Gluten-free",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            subtitle: Text(
-              "Only includes gluten-free meals",
-            ),
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-          )
+            mealsFilter: 'Gluten-free',
+            mealsFilterDetails: 'Only includes gluten-free meals',
+          ),
+          SwitchListTileItem(
+            filterList: _lactoseFreeFilterList,
+            toogleChange: (bool isCheked) {
+              _onSwitchFilterChange(isCheked, 'lactose');
+            },
+            mealsFilter: 'Lactose-free',
+            mealsFilterDetails: 'Only includes lactose-free meals',
+          ),
+          SwitchListTileItem(
+            filterList: _vegetarianFreeFilterList,
+            toogleChange: (bool isCheked) {
+              _onSwitchFilterChange(isCheked, 'vegetarian');
+            },
+            mealsFilter: 'Vegetarian',
+            mealsFilterDetails: 'Only includes vegetarian meals',
+          ),
+          SwitchListTileItem(
+            filterList: _veganFreeFilterList,
+            toogleChange: (bool isCheked) {
+              _onSwitchFilterChange(isCheked, 'vegan');
+            },
+            mealsFilter: 'Vegan',
+            mealsFilterDetails: 'Only includes vegan meals',
+          ),
         ],
       ),
     );
