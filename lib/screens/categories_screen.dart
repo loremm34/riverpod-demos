@@ -3,9 +3,12 @@ import 'package:flutter_application_3/data/default_data.dart';
 import 'package:flutter_application_3/screens/meals_screen.dart';
 import 'package:flutter_application_3/widgets/category_grid_item.dart';
 import 'package:flutter_application_3/models/category.dart';
+import 'package:flutter_application_3/models/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.onFavotiteToogle});
+
+  final void Function(Meal meal) onFavotiteToogle;
 
   void _onCategoryTap(BuildContext context, Category category) {
     final filteredMeals = dummyMeals
@@ -18,6 +21,7 @@ class CategoriesScreen extends StatelessWidget {
           return MealsScreen(
             title: category.title,
             meals: filteredMeals,
+            onFavotiteToogle: onFavotiteToogle,
           );
         },
       ),
@@ -27,9 +31,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Appbar title"),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: GridView(

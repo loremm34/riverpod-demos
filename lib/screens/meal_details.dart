@@ -2,15 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_3/models/meal.dart';
 
 class MealDetails extends StatelessWidget {
-  const MealDetails({super.key, required this.meal});
+  const MealDetails(
+      {super.key, required this.meal, required this.onFavotiteToogle});
 
   final Meal meal;
+  final void Function(Meal meal) onFavotiteToogle;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onFavotiteToogle(meal);
+            },
+            icon: Icon(
+              Icons.star,
+            ),
+          )
+        ],
       ),
       body: ListView(
         children: [

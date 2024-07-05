@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/screens/categories_screen.dart';
 import 'package:flutter_application_3/screens/meals_screen.dart';
+import 'package:flutter_application_3/models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -11,11 +12,37 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedTab = 0;
+  final List<Meal> _favorites = [];
   final List<String> _titles = ["Meals", "Favorites"];
 
   void _selecteTab(int index) {
     if (_selectedTab == index) return;
     _selectedTab = index;
+    setState(() {});
+  }
+
+  void _showInfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(
+          seconds: 5,
+        ),
+        content: Text(message),
+      ),
+    );
+  }
+
+  void _toogleMealFavoriteStatus(Meal meal) {
+    final isExisting = _favorites.contains(meal);
+
+    if (isExisting) {
+      _favorites.remove(meal);
+      _showInfoMessage("Meal is no longer in favorites");
+    } else {
+      _favorites.add(meal);
+      _showInfoMessage("Marked as favorite");
+    }
     setState(() {});
   }
 
@@ -28,20 +55,28 @@ class _TabsScreenState extends State<TabsScreen> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          CategoriesScreen(),
+          CategoriesScreen(
+            onFavotiteToogle: _toogleMealFavoriteStatus,
+          ),
           MealsScreen(
             title: "",
-            meals: [],
+            meals: _favorites,
+            onFavotiteToogle: _toogleMealFavoriteStatus,
           )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         onTap: _selecteTab,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.set_meal), label: "Meals"),
+        items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.set_meal), label: "Favorites"),
+            icon: Icon(Icons.set_meal),
+            label: "Meals",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.set_meal),
+            label: "Favorites",
+          ),
         ],
       ),
     );
