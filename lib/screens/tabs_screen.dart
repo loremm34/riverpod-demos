@@ -3,6 +3,7 @@ import 'package:flutter_application_3/screens/categories_screen.dart';
 import 'package:flutter_application_3/screens/meals_screen.dart';
 import 'package:flutter_application_3/models/meal.dart';
 import 'package:flutter_application_3/widgets/main_drawer.dart';
+import 'package:flutter_application_3/screens/filters_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -48,10 +49,15 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   void _setScreen(String identifier) {
+    Navigator.of(context).pop();
     if (identifier == "filters") {
-      return;
-    } else {
-      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return FiltersScreen();
+          },
+        ),
+      );
     }
   }
 
