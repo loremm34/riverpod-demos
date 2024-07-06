@@ -3,6 +3,13 @@ import 'package:flutter_application_3/widgets/main_drawer.dart';
 import 'package:flutter_application_3/screens/tabs_screen.dart';
 import 'package:flutter_application_3/widgets/switch_list_tile_item.dart';
 
+enum Filter {
+  glutenFree,
+  lactoseFree,
+  vegetarian,
+  vegan,
+}
+
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
 
@@ -48,15 +55,27 @@ class _FiltersScreenState extends State<FiltersScreen> {
     }
   }
 
+  void _saveFilters() {
+    Navigator.of(context).pop({
+      Filter.glutenFree: _glutenFreeFilterList,
+      Filter.lactoseFree: _lactoseFreeFilterList,
+      Filter.vegetarian: _vegetarianFreeFilterList,
+      Filter.vegan: _veganFreeFilterList,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(
         onSelectScreen: _selectScreen,
       ),
-      appBar: AppBar(
-        title: const Text("Your Filters"),
-      ),
+      appBar: AppBar(title: const Text("Your Filters"), actions: [
+        IconButton(
+          icon: const Icon(Icons.save),
+          onPressed: _saveFilters,
+        ),
+      ]),
       body: Column(
         children: [
           SwitchListTileItem(
