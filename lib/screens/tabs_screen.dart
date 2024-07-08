@@ -3,10 +3,10 @@ import 'package:flutter_application_3/providers/meals_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_3/screens/categories_screen.dart';
 import 'package:flutter_application_3/screens/meals_screen.dart';
-import 'package:flutter_application_3/models/meal.dart';
 import 'package:flutter_application_3/widgets/main_drawer.dart';
 import 'package:flutter_application_3/screens/filters_screen.dart';
 import 'package:flutter_application_3/providers/favorites_provider.dart';
+import 'package:flutter_application_3/providers/filters_provider.dart';
 
 const kInitialFilters = {
   Filter.glutenFree: false,
