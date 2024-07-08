@@ -6,12 +6,8 @@ import 'package:flutter_application_3/models/category.dart';
 import 'package:flutter_application_3/models/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen(
-      {super.key,
-      required this.onFavotiteToogle,
-      required this.availableMeals});
+  const CategoriesScreen({super.key, required this.availableMeals});
 
-  final void Function(Meal meal) onFavotiteToogle;
   final List<Meal> availableMeals;
 
   void _onCategoryTap(BuildContext context, Category category) {
@@ -25,7 +21,6 @@ class CategoriesScreen extends StatelessWidget {
           return MealsScreen(
             title: category.title,
             meals: filteredMeals,
-            onFavotiteToogle: onFavotiteToogle,
           );
         },
       ),
